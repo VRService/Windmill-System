@@ -1,0 +1,22 @@
+extends layout
+block content
+  div(class="container h-100")
+    div(class="row h-100 justify-content-center align-items-center")
+      // (Form posts to /login endpoint)
+      form(action="/login" method="POST" class="col-4 form-horizontal")
+        .form-group
+          if info != null
+            // If there is a notification 
+            div(class="alert alert-primary col-200" role="alert")=`${info}`
+            br
+        .form-group
+          label.control-label Email
+          .col-200
+            input#email.form-control(name='email' type='email' autocomplete='username email')
+        .form-group
+          label.control-label Password
+          .col-200
+            input#password.form-control(name='password' type='password' autocomplete='password')
+        .form-group
+          .col-sm-offset-2.col-20
+            button.btn.btn-primary(type='submit') Log in

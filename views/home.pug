@@ -1,0 +1,24 @@
+extends layout
+block content
+  div(class="container h-100")
+    br
+    // Customised greeting to the user.
+    h1(class="row h-100 justify-content-center align-items-center")=`Hi, ${user.first_name}`
+    h4(class="row h-100 justify-content-center align-items-center")=`Welcome to the Windmill System. You're logged in as an ${user.acc_type}`
+    div(class="row h-100 justify-content-center align-items-center text-center col-sm-10 col-sm offset-1")
+      form(action="/user-profile" method="get" class="col-4 form-horizontal")
+        .form-group
+          if info != null
+            // If there is a flash info attached.
+            div(class="alert alert-primary col-200" role="alert")=`${info}`
+            br
+        .form-group
+          label.control-label Enter Pupil Name
+          .col-200
+            input#email.form-control(name='first_name' type='text' placeholder='First Name')
+          .col-200
+            input#email.form-control(name='last_name' type='text' placeholder='Last Name')
+        .form-group
+          .col-sm-offset-2.col-20
+            // Redirects to windmill tab endpoint.
+            button.btn.btn-primary(type='submit') Find User

@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    // Require jQuery (full). Eventually should be downloaded and served offline under /assets
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    // Sets page icon to ampleforth logo.
+    link(rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon")
+    // Dynamically sets title.
+    title=`${title}`
+    // (@Below) redirects to homepage if user clicks the title or icon.
+    nav(class="navbar navbar-dark bg-dark")
+      a(class="navbar-brand" href="/home")
+        img(src="/assets/logo.png" style="height: 30px;")
+      a(class="navbar-brand" href="/home")=`Windmill System - ${title}`
+      if loggedIn
+        div(class="text-right")
+          // Redirects to logout & ends session.
+          a(class="btn btn-primary mr-sm-2" href="/logout")="Log out"
+  body
+    block content
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

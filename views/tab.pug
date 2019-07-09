@@ -1,0 +1,41 @@
+extends layout
+block content
+  // Stores, invisibly, all the data tab.js needs to function.
+  meta(type="hidden",id="user-data",user-id=`${pupil._id}`,balance=`${pupil.account_balance}` csrf-token=`${csrfToken}`)
+  div(class="bg-white")
+    // Uses cards for the product displays.
+    style=".card {display:inline-block;}"
+    span(class="d-block p-2 text-white text-right" style="background-image: linear-gradient(45deg, MediumOrchid,RebeccaPurple); height: 50px; width: fill;")
+        b(style="display: inline-block; text-shadow: 0px 2px black;" id="current-order" class="col-lg-7")=""
+        button(style="display: inline-block;" id="order-btn" type="button" class="btn btn-secondary col-1")="Order"
+    
+    span(class="d-block p-2  text-white" style="background-color: RoyalBlue; height: 100px; width: fill;")
+      h1(class="display-6" style="text-shadow: 0px 3px black;")=`${pupil.first_name} ${pupil.last_name}'s Profile`
+      b(class="lead" style="text-shadow: 0px 2px black;")=`Account Balance: £${pupil.account_balance}`
+    div(class="col")
+      div(class="row" id="product-list")
+        each product in products
+            div(id="wrapper" class='col-md-5 col-lg-3 mt-3')
+              div(price=`${product.product_price}` alcohol-value=`${product.is_alcohol}` product-name=`${product.product_name}` product-category=`${product.product_category}` id="product" class=(product.is_alcohol == true?'card bg-light border-warning':"card"))
+                  div(class="card-body")
+                      h4(class="card-title")
+                        // Breakout Logic: Adds a little emoji to indicate if it is food or drink.
+                          (Thought it'd be a nice touch)
+                        if product.product_category == "Food"
+                          p=`${product.product_name} 🍔`
+                        else if product.product_category == "Drink"
+                          p=`${product.product_name} 🍺`
+                        else
+                          p=`${product.product_name}`
+                      p(class="card-text")
+                        // Adds description data
+                        p=`Product Code: ` + (product.shorthand_name != null?product.shorthand_name:"N/A")
+                        p=`Category: ${product.product_category}`
+                        p=`Creates Order: ` + (product.create_order == true?"Yes":"No")
+                      div(class="row")
+                          div(class="col-sm-4")
+                              a(id="remove-btn" class="btn btn-danger btn-block" hidden="hidden")="Remove"
+                          div(class="col")
+                              a(id="buy-btn" class="btn btn-success btn-block" price-value=`${product.product_price}`)=`Add to Bill (+£${product.product_price})`
+  script
+    include /assets/tab.js
